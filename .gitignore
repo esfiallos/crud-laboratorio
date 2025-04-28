@@ -1,0 +1,22 @@
+# Ignorar directorios y archivos específicos de IDEs
+.idea/
+.vs/
+.vscode/
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# Ignorar archivos específicos de React
+node_modules/
+
+# Ignorar archivos de compilación de Spring Boot
+target/
+*.jar
+*.war
+*.ear
+
+# Ignorar configuraciones de archivos del sistema operativo
+.DS_Store
+Thumbs.db
