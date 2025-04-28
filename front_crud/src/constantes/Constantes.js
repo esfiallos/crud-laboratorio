@@ -21,3 +21,6 @@ export const estados = [
     { code: '03', name: 'Pausado' },
     { code: '04', name: 'Cancelado' },
 ];
+
+export const API_BASE_URL = "http://localhost:8080/api";
+export const DROPDOWN_CLOSE_DELAY = 200;

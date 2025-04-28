@@ -8,6 +8,7 @@ import com.laboratorio.CRUD.Repositorios.repositorioAnimes;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -37,6 +38,15 @@ public class servicioAnime {
     public Animes getAnimeById(Integer id)
     {
         return repoAnimes.findById(id).orElse(null);
+    }
+
+    public List<Animes> getAnimesByName(String nombre) {
+       List<Animes> AllAnimes = repoAnimes.findAll();
+        return AllAnimes.stream().filter(
+                animes -> animes.getNombre()
+                        .toLowerCase()
+                        .contains(nombre.toLowerCase()))
+                        .collect(Collectors.toList());
     }
 
     public Animes UpdateAnime(Integer id, Animes anime)

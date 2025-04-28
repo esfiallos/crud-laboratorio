@@ -28,6 +28,12 @@ public class AnimesController {
         return servAni.getAllAnimes();
     }
 
+    @GetMapping("/MostrarAnimes/{nombre}")
+    public List<Animes> getAnimesByName(@PathVariable String nombre) {
+        return servAni.getAnimesByName(nombre);
+    }
+
+
     @DeleteMapping("/animes/{id}")
     public ResponseEntity<?> deleteAnimes(@PathVariable Integer id)
     {

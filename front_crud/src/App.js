@@ -8,6 +8,7 @@ import UpdateAnime from './pages/animes/UpdateAnime';
 
 
 function App() {
+  
   return (
     <>
       <Header />
