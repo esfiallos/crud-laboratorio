@@ -49,7 +49,7 @@ const Dashboard = () => {
     }
 
     return (
-        <>
+        
            <Container className="mt-5">
             <Row>
                 <Col>
@@ -79,7 +79,7 @@ const Dashboard = () => {
                             <td>{anime.valoracion}</td>
                             <td>
                                 <Button variant="outline-secondary" onClick={() => handleUpdate(anime.id)}>Actualizar</Button>
-                                <Button variant="outline-danger" onClick={() => handleDelete()}>Eliminar</Button>
+                                <Button variant="outline-danger" onClick={() => handleDelete(anime.id)}>Eliminar</Button>
                             </td>
                             </tr>
                         ))}
@@ -88,7 +88,7 @@ const Dashboard = () => {
                 </Col>
             </Row>
             </Container>
-        </>
+    
     );
 }
 
