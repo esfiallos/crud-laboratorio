@@ -22,6 +22,10 @@ const PostAnime = () => {
     const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
     const [isStateDropdownOpen, setIsStateDropdownOpen] = useState(false);
 
+    const navigate = useNavigate();
+
+
+    // Manejadores
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -70,7 +74,7 @@ const PostAnime = () => {
         }, DROPDOWN_CLOSE_DELAY);
     };
 
-    const navigate = useNavigate();
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
