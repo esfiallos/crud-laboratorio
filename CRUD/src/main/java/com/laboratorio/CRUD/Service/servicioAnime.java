@@ -10,21 +10,40 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Servicio que proporciona la lógica de negocio para la gestión de entidades {@link Animes}.
+ * Interactúa con el {@link repositorioAnimes} para realizar operaciones de persistencia.
+ */
 @Service
 @RequiredArgsConstructor
 public class servicioAnime {
 
     private final repositorioAnimes repoAnimes;
 
+    /**
+     * Guarda un anime en la base de datos
+     * @param anime
+     * @return El objeto {@link Animes}
+     */
     public Animes postAnimes(Animes anime)
     {
         return repoAnimes.save(anime);
     }
 
+    /**
+     * Obtiene una lista de todos los elementos almacenados en la base de datos
+     * @return Una {@link List} que contiene todos los objetos {@link Animes} encontrados.
+     * Retorna una lista vacía si no hay animes en la base de datos.
+     */
     public List<Animes> getAllAnimes() {
         return repoAnimes.findAll();
     }
 
+    /**
+     * Elimina un anime de la base de datos por su Id
+     * @param id
+     *  @throws EntityNotFoundException Si no se encuentra ningún anime
+     */
     public void deleteAnimes(Integer id)
     {
         if(!repoAnimes.existsById(id))
@@ -35,11 +54,23 @@ public class servicioAnime {
         repoAnimes.deleteById(id);
     }
 
+    /**
+     * Obtiene  un anime por su Identificador
+     * @param id
+     * @return El objeto {@link Animes} encontrado con el ID especificado,
+     */
     public Animes getAnimeById(Integer id)
     {
         return repoAnimes.findById(id).orElse(null);
     }
 
+    /**
+     * Funcion Filtro para Obtener animes por su nombre
+     * Busca animes cuyo nombre contiene la cadena de búsqueda
+     *
+     * @param nombre del anime a buscar
+     * @return Una lista de animes cuyo nombre contenga los datos del @param
+     */
     public List<Animes> getAnimesByName(String nombre) {
        List<Animes> AllAnimes = repoAnimes.findAll();
         return AllAnimes.stream().filter(
@@ -49,6 +80,13 @@ public class servicioAnime {
                         .collect(Collectors.toList());
     }
 
+    /**
+     * Actualiza un anime de la base de datos
+     *
+     * @param id
+     * @param anime
+     * @return El objeto Actualizado
+     */
     public Animes UpdateAnime(Integer id, Animes anime)
     {
         Optional<Animes> AnimeOpcional = repoAnimes.findById(id);
