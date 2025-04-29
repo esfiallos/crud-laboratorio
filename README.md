@@ -61,7 +61,7 @@ La API está disponible bajo el prefijo `/api`. A continuación, se describen lo
             "categoria": "Género del anime",
             "capitulos": 12,
             "estado": "En emisión",
-            "valoracion": 4.5
+            "valoracion": 4
         }
         ```
     * **Respuesta (JSON):** El anime creado con su ID asignado.
