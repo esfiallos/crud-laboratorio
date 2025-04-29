@@ -22,19 +22,31 @@ const UpdateAnime = () => {
     const [filteredStates, setFilteredStates] = useState([]);
     const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
     const [isStateDropdownOpen, setIsStateDropdownOpen] = useState(false);
-
-    const fetchAnime = async () => {
-        try {
-            const data = await apiService.get(`animes/${id}`);
-            setFormData(data);
-        } catch(error) {
-            console.error("Error fetching animes:", error);
-        }
-    }
+    const [isValid, setIsValid] = useState(false);
 
     useEffect(() => {
+        const fetchAnime = async () => {
+            try {
+                const data = await apiService.get(`animes/${id}`);
+                setFormData(data);
+            } catch(error) {
+                console.error("Error fetching animes:", error);
+            }
+        }
         fetchAnime();
     }, [id]);
+
+
+    useEffect(() => {
+        const isNombreValid = formData.nombre.trim() !== "";
+        const isDescripcionValid = formData.descripcion.trim() !== "";
+        const isCategoriaValid = formData.categoria.trim() !== "";
+        const isCapitulosValid = formData.capitulos !== "" && !isNaN(formData.capitulos);
+        const isEstadoValid = formData.estado.trim() !== "";
+        const isValoracionValid = formData.valoracion !== "" && !isNaN(formData.valoracion);
+
+        setIsValid(isNombreValid && isDescripcionValid && isCategoriaValid && isCapitulosValid && isEstadoValid && isValoracionValid);
+    }, [formData]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -121,7 +133,7 @@ const UpdateAnime = () => {
                     />
                 </Form.Group>
 
-                <Form.Group controlId="formCategoria">
+                <Form.Group controlId="formCategoria" className="position-relative">
                     <Form.Control
                         type="text"
                         name="categoria"
@@ -155,7 +167,7 @@ const UpdateAnime = () => {
                     />
                 </Form.Group>
 
-                <Form.Group controlId="formEstado">
+                <Form.Group controlId="formEstado" className="position-relative">
                     <Form.Control
                         type="text"
                         name="estado"
@@ -189,7 +201,7 @@ const UpdateAnime = () => {
                     />
                 </Form.Group>
 
-                <Button variant="primary" type="submit" className="w-100">
+                <Button variant="primary" type="submit" className="w-100" disabled={!isValid}>
                     Editar Anime
                 </Button>
             </Form>
