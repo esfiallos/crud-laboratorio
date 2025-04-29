@@ -3,9 +3,19 @@ package com.laboratorio.CRUD.Entidades;
 import jakarta.persistence.*;
 import lombok.Data;
 
+/**
+ * Representa la entidad de un Anime en la base de datos.
+ * Contiene información básica sobre un anime como su nombre, descripción, categoría,
+ * número de capítulos, estado de emisión y valoración por los usuarios.
+ */
 @Entity
 @Data
 public class Animes {
+
+    /**
+     * Identificador único del anime.
+     * Este campo es generado automáticamente por la base de datos.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -23,51 +33,4 @@ public class Animes {
     @Basic
     private int valoracion;
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public String getCapitulos() {
-        return capitulos;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public int getValoracion() {
-        return valoracion;
-    }
-
-    public void setValoracion(int valoracion) {
-        this.valoracion = valoracion;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public void setCapitulos(String capitulos) {
-        this.capitulos = capitulos;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
 }

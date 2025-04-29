@@ -2,7 +2,8 @@ import "./UpdateAnime.css";
 import { useState, useEffect } from "react";
 import { Button, Form, ListGroup } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
-import { categorias, estados } from "../../constantes/Constantes";
+import { categorias, estados, DROPDOWN_CLOSE_DELAY } from "../../constantes/Constantes";
+import apiService from "../../services/apiServices"
 
 const UpdateAnime = () => {
     const { id } = useParams();
@@ -22,16 +23,16 @@ const UpdateAnime = () => {
     const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
     const [isStateDropdownOpen, setIsStateDropdownOpen] = useState(false);
 
+    const fetchAnime = async () => {
+        try {
+            const data = await apiService.get(`animes/${id}`);
+            setFormData(data);
+        } catch(error) {
+            console.error("Error fetching animes:", error);
+        }
+    }
+
     useEffect(() => {
-        const fetchAnime = async () => {
-            try {
-                const response = await fetch(`http://localhost:8080/api/animes/${id}`);
-                const data = await response.json();
-                setFormData(data);
-            } catch (error) {
-                console.error("Error fetching anime:", error);
-            }
-        };
         fetchAnime();
     }, [id]);
 
@@ -74,13 +75,13 @@ const UpdateAnime = () => {
     const handleCategoryBlur = () => {
         setTimeout(() => {
             setIsCategoryDropdownOpen(false);
-        }, 200);
+        }, DROPDOWN_CLOSE_DELAY);
     };
 
     const handleStateBlur = () => {
         setTimeout(() => {
             setIsStateDropdownOpen(false);
-        }, 200);
+        }, DROPDOWN_CLOSE_DELAY);
     };
 
     const handleSubmit = async (e) => {
@@ -88,19 +89,13 @@ const UpdateAnime = () => {
         console.log(formData);
 
         try {
-            const response = await fetch(`http://localhost:8080/api/animes/${id}`, {
-                method: "PATCH",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData)
-            });
-
-            const data = await response.json();
-            console.log("Anime actualizado", data);
+            const data = await apiService.patch(`animes/${id}`, formData);
+            console.log("Anime creado", data);
             navigate("/");
         } catch (error) {
             console.error("Error al enviar los datos:", error);
         }
-    };
+    }
 
     return (
         <div className="center-form">

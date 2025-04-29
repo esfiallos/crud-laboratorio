@@ -4,11 +4,11 @@ import './Header.css';
 
 const Header = () => {
   return (
-    <> 
+    
     <Navbar bg="primary" variant="dark" expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/">
-          <strong>Administrador de Animes</strong>
+          <strong>Administrador</strong>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -23,7 +23,7 @@ const Header = () => {
         </Navbar.Collapse>
       </Container>
     </Navbar>
-    </>
+    
   );
 }
 

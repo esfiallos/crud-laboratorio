@@ -2,10 +2,8 @@ import { useState } from "react";
 import "./PostAnime.css";
 import { Button, Form, ListGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { categorias } from "../../constantes/Constantes";
-import { estados } from "../../constantes/Constantes";
-
-const DROPDOWN_CLOSE_DELAY = 200;
+import { categorias, estados, DROPDOWN_CLOSE_DELAY } from "../../constantes/Constantes";
+import apiService from "../../services/apiServices"
 
 const PostAnime = () => {
 
@@ -24,6 +22,10 @@ const PostAnime = () => {
     const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
     const [isStateDropdownOpen, setIsStateDropdownOpen] = useState(false);
 
+    const navigate = useNavigate();
+
+
+    // Manejadores
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -72,26 +74,20 @@ const PostAnime = () => {
         }, DROPDOWN_CLOSE_DELAY);
     };
 
-    const navigate = useNavigate();
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(formData);
 
         try {
-            const response = await fetch("http://localhost:8080/api/animes", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData)
-            });
-
-            const data = await response.json();
+            const data = await apiService.post("animes", formData);
             console.log("Anime creado", data);
             navigate("/");
         } catch (error) {
             console.error("Error al enviar los datos:", error);
         }
-    };
+    }
 
     return (
         <div className="center-form">
