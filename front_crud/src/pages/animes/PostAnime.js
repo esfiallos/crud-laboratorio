@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./PostAnime.css";
 import { Button, Form, ListGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -21,8 +21,21 @@ const PostAnime = () => {
     const [filteredStates, setFilteredStates] = useState([]);
     const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
     const [isStateDropdownOpen, setIsStateDropdownOpen] = useState(false);
+    const [isValid, setIsValid] = useState(false);
 
     const navigate = useNavigate();
+
+    // Validacion de campos para Evitar enviar valores en blanco
+    useEffect(() => {
+        const isNombreValid = formData.nombre.trim() !== "";
+        const isDescripcionValid = formData.descripcion.trim() !== "";
+        const isCategoriaValid = formData.categoria.trim() !== "";
+        const isCapitulosValid = formData.capitulos !== "" && !isNaN(formData.capitulos);
+        const isEstadoValid = formData.estado.trim() !== "";
+        const isValoracionValid = formData.valoracion !== "" && !isNaN(formData.valoracion);
+
+        setIsValid(isNombreValid && isDescripcionValid && isCategoriaValid && isCapitulosValid && isEstadoValid && isValoracionValid);
+    }, [formData]);
 
 
     // Manejadores
@@ -33,14 +46,14 @@ const PostAnime = () => {
             ...formData,
             [name]: value,
         });
- if (name === 'categoria') {
-            const isCode = !isNaN(value);
-            const filtered = isCode 
-                ? categorias.filter(cat => cat.code.includes(value)) 
-                : categorias.filter(cat => cat.name.toLowerCase().includes(value.toLowerCase()) || cat.code.includes(value));
-            setFilteredCategories(filtered);
-            setIsCategoryDropdownOpen(filtered.length > 0);
-        }
+        if (name === 'categoria') {
+                    const isCode = !isNaN(value);
+                    const filtered = isCode 
+                        ? categorias.filter(cat => cat.code.includes(value)) 
+                        : categorias.filter(cat => cat.name.toLowerCase().includes(value.toLowerCase()) || cat.code.includes(value));
+                    setFilteredCategories(filtered);
+                    setIsCategoryDropdownOpen(filtered.length > 0);
+                }
 
         if (name === 'estado') {
             const isCode = !isNaN(value);
@@ -182,7 +195,7 @@ const PostAnime = () => {
                     />
                 </Form.Group>
 
-                <Button variant="primary" type="submit" className="w-100">
+                <Button variant="primary" type="submit" className="w-100" disabled={!isValid}>
                     Guardar Anime
                 </Button>
 

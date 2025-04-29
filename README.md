@@ -12,6 +12,8 @@ Permite realizar las operaciones básicas de Crear, Leer, Actualizar y Eliminar 
 * **MySQL:** Para almacenar la información de los animes.
 * **Maven:** Herramienta de gestión de dependencias y construcción del proyecto.
 * **Lombok:** Librería para reducir el código boilerplate (como getters, setters, constructores).
+* **React: ** Que maneja el Frontend
+* **Bootstrao-react: ** Libreria de Boostrap que esta implementada para React
 
 ## Requisitos Previos
 
@@ -46,7 +48,19 @@ La estructura de la tabla es:
 
 2. **Ejecuta el proyecto**    
 
-    La aplicación estará disponible en `http://localhost:8080`.
+    En Intelillij Ejecuta el servidor Java Spring Boot.
+
+    Para el server en React (Es necesario tener node Instalado) ejecute npm start
+    Si no tiene  las dependencias instaladas ejecute npm install
+
+    Si hay problemas con el uso de las dependencias y requieran su instalacion, por favor use estos comandos:
+
+    - npm i -g react-scripts
+    - npm install react-bootstrap bootstrap
+    - npm install react-bootstrap bootstrap @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons
+
+    El server backend ejecuta localmente en  `http://localhost:8080`.
+    El server frontend ejecuta localmente en `http://localhost:3000`.
 
 ## Endpoints de la API
 
@@ -92,12 +106,10 @@ La API está disponible bajo el prefijo `/api`. A continuación, se describen lo
         ```json
         {
             "estado": "Finalizado",
-            "valoracion": 4.8
+            "valoracion": 4
         }
         
     * **Respuesta (JSON):** El anime actualizado.
     * **Respuesta (Código de estado):**
         * `200 OK`: Si el anime fue actualizado exitosamente.
         * `400 Bad Request`: Si la petición no es válida o no se encontró el anime.
-
-## Estructura del Proyecto

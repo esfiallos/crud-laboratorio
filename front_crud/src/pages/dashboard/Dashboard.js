@@ -17,6 +17,7 @@ const Dashboard = () => {
             setAnimes(data);
         } catch(error) {
             console.error("Error fetching animes:", error);
+            error();
         }
     }
 
@@ -53,6 +54,8 @@ const Dashboard = () => {
             setAnimes(data);
         } catch (error) {
             console.error("Error al buscar animes:", error);
+            error();
+            
         }
     };
 
@@ -82,7 +85,7 @@ const Dashboard = () => {
                     <h1 className="text-center">
                         Animes
                     </h1>
-                    <Table striped bordered hover className="mt-4">
+                    <Table responsive hover className="mt-4">
                         <thead>
                             <tr>
                                 <th>Nombre</th>
@@ -104,8 +107,8 @@ const Dashboard = () => {
                                 <td>{anime.estado}</td>
                                 <td>{anime.valoracion}</td>
                                 <td>
-                                    <Button variant="outline-secondary" onClick={() => handleUpdate(anime.id)}>Actualizar</Button>
-                                    <Button variant="outline-danger" onClick={() => handleDelete(anime.id)}>Eliminar</Button>
+                                    <Button variant="warning" onClick={() => handleUpdate(anime.id)}>Actualizar</Button>
+                                    <Button variant="danger" onClick={() => handleDelete(anime.id)}>Eliminar</Button>
                                 </td>
                                 </tr>
                             ))}
