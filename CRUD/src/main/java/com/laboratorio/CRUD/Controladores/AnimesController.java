@@ -68,7 +68,7 @@ public class AnimesController {
     {
         try {
             servAni.deleteAnimes(id);
-            return new ResponseEntity<>(STR."El Anime con el Id: \{id} Fue Eliminado", HttpStatus.OK);
+            return new ResponseEntity<>("El Anime con el Id:" + id + " Fue Eliminado", HttpStatus.OK);
         } catch(EntityNotFoundException e)
         {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
