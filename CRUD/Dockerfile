@@ -1,0 +1,5 @@
+FROM openjdk:21
+ARG JAR_FILE=target/CRUD-0.0.1-SNAPSHOT.jar
+COPY ${JAR_FILE} app_CRUD
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app_CRUD"]
